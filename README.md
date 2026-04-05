@@ -1,43 +1,47 @@
 # crypto-floating
 
-A tiny Python floating window that shows a live crypto spot price fetched from
-[CoinGlass](https://www.coinglass.com/).  The window stays on top of all other
-windows, is draggable, and refreshes every second.
+基于 Python 的加密货币价格悬浮窗，实时展示来自 [CoinGlass](https://www.coinglass.com/) 的现货价格。
+窗口始终置顶，支持鼠标拖动，每秒刷新一次。
 
-![screenshot](docs/screenshot.png)
+![截图](docs/screenshot.png)
 
 ---
 
-## Requirements
+## 环境要求
 
 - Python 3.9+
-- `tkinter` (ships with most Python distributions; on Debian/Ubuntu install
-  `python3-tk` if missing)
+- `tkinter`（大多数 Python 发行版自带；Debian/Ubuntu 若缺失可执行 `sudo apt install python3-tk`）
 - `requests`
 
-## Installation
+## 安装依赖
 
 ```bash
 pip install -r requirements.txt
 ```
 
-## Usage
+## 使用方法
 
 ```bash
-# Show ETH price (default)
+# 显示 ETH 价格（默认）
 python floating_price.py
 
-# Show BTC price
+# 显示 BTC 价格
 python floating_price.py BTC
 
-# Show any supported symbol
+# 显示任意支持的交易对
 python floating_price.py SOL
 ```
 
-The floating window appears in the **top-right corner** of the screen.  
-Click the **✕** to close it, or drag it anywhere with the mouse.
+悬浮窗默认出现在屏幕**右上角**。  
+点击 **✕** 关闭窗口，或用鼠标将其拖到任意位置。
 
-## Window layout
+调试模式（显示详细日志）：
+
+```bash
+python floating_price.py -v
+```
+
+## 窗口布局
 
 ```
 ETH                        ✕
@@ -45,16 +49,17 @@ ETH                        ✕
              ▲ 1.23%
 ```
 
-| element | description |
-|---------|-------------|
-| symbol  | coin ticker (cyan) |
-| price   | latest spot price in USD, updated every second |
-| change  | 24 h price change percentage (green ▲ / red ▼) |
+| 元素 | 说明 |
+|------|------|
+| 交易对符号 | 代币名称（青色） |
+| 价格 | 最新现货价格（美元），每秒更新 |
+| 涨跌幅 | 24 小时价格变化百分比（上涨绿色 ▲ / 下跌红色 ▼） |
 
-## Data source
+## 数据来源
 
-Prices are fetched from:
+价格数据来自以下接口：
 
 ```
-https://fapi.coinglass.com/api/coin/v2/info?symbol=<SYMBOL>
+https://fapi.coinglass.com/api/coin/v2/info?symbol=<交易对符号>
 ```
+
